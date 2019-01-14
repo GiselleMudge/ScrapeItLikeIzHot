@@ -10,6 +10,7 @@ exports.scrapeWeb = function (req, res) {
   //Generate random number so every scrape is 10 articles
   let pageNum = Math.floor(Math.random()*90);
   //Define the site we want to scrape 
+  let website = `https://www.wired.com/most-recent/page/${pageNum}/`;
   
   request(website, function (err, response, html) {
     const $ = cheerio.load(html);
