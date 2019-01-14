@@ -1,7 +1,7 @@
 //Require cheerio 
 const cheerio = require('cheerio');
 //Get html
-const axios = require("axios");
+const request = require('request');
 //Use Article model
 const db = require('../models');
 
@@ -11,14 +11,11 @@ exports.scrapeWeb = function (req, res) {
   let pageNum = Math.floor(Math.random()*90);
   //Define the site we want to scrape 
   
-  router.get('/scraper', (req,res) =>  {
-    axios.get('https://www.wired.com/most-recent/page/${pageNum}/').then(function(response) {
+  request(website, function (err, response, html) {
     const $ = cheerio.load(html);
-    
+    let result = {};
 
-    $("li.archive-item-component").each((i,element) =>  {
-      let result = {};
-
+    $("li.archive-item-component").each(function(i, element) {
       result.link = 'https://www.wired.com'+$(element).find("a").attr("href");
       result.title = $(element).find("a").find("h2").text().trim();
       result.image = $(element).find("img").attr("src");
@@ -27,7 +24,7 @@ exports.scrapeWeb = function (req, res) {
 
       db.Article.create(result)
       .then(function(dbArticle){
-        //console.log(dbArticle);
+        //console.log(dbArticle)
       })
       .catch(function(error) {
         console.log("Error Scraping News");
