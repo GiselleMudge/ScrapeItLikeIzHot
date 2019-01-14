@@ -10,13 +10,15 @@ exports.scrapeWeb = function (req, res) {
   //Generate random number so every scrape is 10 articles
   let pageNum = Math.floor(Math.random()*90);
   //Define the site we want to scrape 
-  let website = `https://www.wired.com/most-recent/page/${pageNum}/`;
   
-  axios.get(website).then((response) => {
+  router.get('/scraper', (req,res) =>  {
+    axios.get('https://www.wired.com/most-recent/page/${pageNum}/').then(function(response) {
     const $ = cheerio.load(html);
-    let result = {};
+    
 
-    $("li.archive-item-component").each(function(i, element) {
+    $("li.archive-item-component").each((i,element) =>  {
+      let result = {};
+
       result.link = 'https://www.wired.com'+$(element).find("a").attr("href");
       result.title = $(element).find("a").find("h2").text().trim();
       result.image = $(element).find("img").attr("src");
