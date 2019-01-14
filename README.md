@@ -26,6 +26,8 @@ This is a web app where Mongoose and Cheerio is utilized to scrape news from ano
 
 ## Instructions
 
+BEFORE YOU START! Access the site through https://scrapeitlikeizhot.herokuapp.com/
+
   1. Whenever a user visits this site, the app should scrape stories from my chosen source and display them for the user. Each scraped article is saved to the application database. The app will scrape and display the following information for each article:
 
      * Headline - the title of the article
