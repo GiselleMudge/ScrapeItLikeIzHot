@@ -5,13 +5,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
 //local database connection
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapewired";
-mongoose.connect(MONGODB_URI
-  );
-
-// mongoose.connect("mongodb://localhost/scrapewired");
-
-mongoose.connect('mongodb://heroku_82cw7xkr:sbq98ufe25nk8bhjeff7h0ab03@ds129801.mlab.com:29801/heroku_82cw7xkr');
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
 
 const db = mongoose.connection;
 
@@ -24,7 +19,7 @@ db.on("error", function(error)
 //Mongoose connedtion to db
 db.once("open", function() 
 {
-  console.log("Mongoose connection successful!");
+  console.log("Mongoose we have lift off!");
 });
 
 //Export the database
