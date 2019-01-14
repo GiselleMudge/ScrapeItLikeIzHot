@@ -1,7 +1,7 @@
 //Require cheerio 
 const cheerio = require('cheerio');
 //Get html
-const request = require('request');
+const axios = require("axios");
 //Use Article model
 const db = require('../models');
 
@@ -12,7 +12,7 @@ exports.scrapeWeb = function (req, res) {
   //Define the site we want to scrape 
   let website = `https://www.wired.com/most-recent/page/${pageNum}/`;
   
-  request(website, function (err, response, html) {
+  axios.get(website).then((response) => {
     const $ = cheerio.load(html);
     let result = {};
 
